@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro · Italy Family 2026</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#171a21; --card2:#1e222b; --line:#2a2f3a;
+    --txt:#e8eaed; --muted:#9aa3b2; --accent:#e0b04a; --accent2:#c0392b;
+    --green:#2ECC71; --blue:#4a90d9;
+    --rail:#3a4150;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.6;padding:0 0 70px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* HERO */
+  .hero{position:relative;height:380px;display:flex;align-items:flex-end;
+    background:linear-gradient(rgba(15,17,21,.15),rgba(15,17,21,.96)), url('imgs/italy-family/colosseum.jpg') center 30%/cover;
+    border-bottom:1px solid var(--line)}
+  .hero .wrap{width:100%;padding-bottom:30px}
+  .hero h1{font-size:52px;letter-spacing:-1.5px;line-height:1.02}
+  .hero .sub{color:var(--accent);font-weight:700;margin-bottom:8px;font-size:14px;letter-spacing:3px;text-transform:uppercase}
+  .hero .meta{color:#d6dae2;margin-top:12px;font-size:15px}
+
+  /* TRIP OVERVIEW STRIP */
+  .overview{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    flex:1 1 160px;max-width:210px;text-decoration:none;color:var(--txt);display:block;
+    transition:transform .15s,border-color .15s}
+  .chip:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .chip .thumb{position:relative;height:92px;background:#000}
+  .chip .thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.92}
+  .chip:hover .thumb img{opacity:1}
+  .chip .emo{position:absolute;left:8px;bottom:6px;font-size:20px;filter:drop-shadow(0 1px 3px #000)}
+  .chip .cbody{padding:9px 12px 11px}
+  .chip .city{font-weight:700;font-size:15px}
+  .chip .dt{color:var(--muted);font-size:12.5px;margin-top:1px}
+  .chip .st{display:inline-block;font-size:10px;font-weight:800;margin-top:6px;padding:2px 8px;border-radius:99px;letter-spacing:.4px}
+  .st.done{background:rgba(46,204,113,.15);color:var(--green)}
+  .st.wip{background:rgba(224,176,74,.15);color:var(--accent)}
+
+  h2{font-size:24px;margin:40px 0 18px;padding-bottom:8px;border-bottom:1px solid var(--line);letter-spacing:-.3px}
+
+  /* CITY SECTION HEADER */
+  .city{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:56px 0 6px;
+    padding-bottom:12px;border-bottom:2px solid var(--line);scroll-margin-top:20px}
+  .city h2{border:none;margin:0;padding:0;font-size:30px}
+  .city .flag{font-size:28px}
+  .city .dates{color:var(--muted);font-size:14px;margin-left:auto}
+  .city .status{font-size:12px;font-weight:800;padding:5px 12px;border-radius:99px;letter-spacing:.5px}
+  .status.done{background:rgba(46,204,113,.15);color:var(--green)}
+  .status.wip{background:rgba(224,176,74,.15);color:var(--accent)}
+
+  /* TICKET CARDS */
+  .tickets{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  .tk{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .tk .tag{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+  .tk.vat .tag{color:var(--accent)} .tk.col .tag{color:var(--accent2)}
+  .tk h3{font-size:18px;margin:6px 0 4px} .tk .when{color:var(--muted);font-size:14px}
+  .tk .code{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--blue);margin-top:8px;word-break:break-all}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;margin-top:10px}
+  .pill.ok{background:rgba(46,204,113,.15);color:var(--green)}
+  .pill.todo{background:rgba(224,176,74,.15);color:var(--accent)}
+
+  .subh{font-size:15px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin:26px 0 12px}
+
+  /* ===== TIMELINE ===== */
+  .timeline{position:relative;margin-top:10px;padding-left:54px}
+  .timeline::before{content:"";position:absolute;left:19px;top:6px;bottom:6px;width:3px;
+    background:linear-gradient(var(--accent),var(--rail));border-radius:3px}
+  .tl-day{position:relative;margin-bottom:38px}
+  .tl-dot{position:absolute;left:-54px;top:0;width:40px;height:40px;border-radius:50%;
+    background:var(--accent);color:#12141a;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;box-shadow:0 0 0 5px var(--bg),0 0 0 6px var(--line)}
+  .tl-day.final .tl-dot{background:var(--accent2);color:#fff}
+
+  .tl-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .tl-top{padding:16px 20px 6px}
+  .tl-date{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .tl-date .d{font-size:22px;font-weight:800;letter-spacing:-.3px}
+  .tl-date .w{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1.5px}
+  .walk{margin-left:auto;font-size:12px;font-weight:700;color:var(--green);
+    background:rgba(46,204,113,.12);border:1px solid rgba(46,204,113,.3);padding:3px 10px;border-radius:99px}
+  .tl-theme{color:var(--accent);font-weight:600;font-size:14.5px;margin:2px 0 4px}
+  .tl-plan{color:#c2c8d2;font-size:13.5px;margin-bottom:6px}
+  .tl-plan b{color:var(--txt)}
+  .maproute{display:inline-flex;align-items:center;gap:6px;margin:2px 0 6px;
+    background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px 12px;
+    color:var(--blue);text-decoration:none;font-size:13px;font-weight:600;transition:border-color .15s,background .15s}
+  .maproute:hover{border-color:var(--blue);background:#12161c}
+
+  /* horizontal scroll strip of stops */
+  .stops{display:flex;gap:12px;overflow-x:auto;padding:12px 20px 18px;scroll-snap-type:x mandatory}
+  .stops::-webkit-scrollbar{height:8px}
+  .stops::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+  .stop{scroll-snap-align:start;flex:0 0 210px;background:var(--card2);border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .stop .ph{position:relative;height:130px;background:#000}
+  .stop .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .stop .seq{position:absolute;left:8px;bottom:8px;width:22px;height:22px;border-radius:50%;
+    background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center}
+  .stop .badge{position:absolute;top:8px;right:8px;font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;
+    letter-spacing:.5px;color:#fff;background:var(--accent2)}
+  .stop .badge.v{background:var(--accent);color:#1a1a1a}
+  .stop .badge.t{background:var(--blue)}
+  .stop .badge.w{background:#5a3e8a}
+  .stop .cap{padding:9px 11px}
+  .stop .cap .name{font-weight:700;font-size:14px;line-height:1.2}
+  .stop .cap .note{color:var(--muted);font-size:12px;margin-top:2px}
+
+  /* BOX */
+  .box{background:var(--card2);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:12px;padding:18px 20px;margin:10px 0}
+  .box.tip{border-left-color:var(--green)}
+  .box.info{border-left-color:var(--blue)}
+  .box h4{font-size:16px;margin-bottom:8px}
+  .box a{color:var(--blue);text-decoration:none;word-break:break-all}
+  .box ul{margin:8px 0 0 18px} .box li{margin:4px 0;font-size:14px}
+  .box code{font-family:ui-monospace,Menlo,monospace;background:#000;padding:2px 6px;border-radius:5px;font-size:12.5px}
+
+  /* ALERT ROW */
+  .alert{display:flex;gap:10px;align-items:flex-start;background:rgba(224,176,74,.07);
+    border:1px solid rgba(224,176,74,.25);border-radius:10px;padding:12px 14px;margin:8px 0;font-size:13.5px}
+  .alert .ic{font-size:18px;flex-shrink:0;margin-top:1px}
+
+  /* FOOD TOGGLE */
+  .food-toggle{margin:4px 0 8px}
+  .food-toggle summary{
+    list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+    font-size:12.5px;font-weight:600;color:var(--muted);
+    background:var(--card2);border:1px solid var(--line);border-radius:8px;
+    padding:5px 12px;transition:color .15s,border-color .15s;user-select:none;
+    outline:none}
+  .food-toggle summary::-webkit-details-marker{display:none}
+  .food-toggle summary::after{content:"▾";margin-left:2px;font-size:10px;transition:transform .2s;opacity:.6}
+  .food-toggle[open] summary{color:var(--accent);border-color:rgba(224,176,74,.35)}
+  .food-toggle[open] summary::after{transform:rotate(-180deg)}
+  .food-list{margin:8px 0 2px;display:flex;flex-direction:column;gap:6px}
+  .food-item{background:#12151c;border:1px solid var(--line);border-radius:9px;
+    padding:9px 12px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .food-item .fi-info{flex:1;min-width:0}
+  .food-item .fi-name{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .food-item .fi-note{color:var(--muted);font-size:11.5px;margin-top:1px}
+  .food-item .fi-link{flex-shrink:0;color:var(--blue);font-size:11.5px;font-weight:700;
+    text-decoration:none;background:#000;padding:4px 9px;border-radius:6px;
+    white-space:nowrap;border:1px solid var(--line);transition:border-color .15s}
+  .food-item .fi-link:hover{border-color:var(--blue)}
+
+  footer{color:var(--muted);text-align:center;margin-top:50px;font-size:13px}
+  @media(max-width:640px){ .hero h1{font-size:36px} .tickets{grid-template-columns:1fr} .timeline{padding-left:46px} .tl-dot{left:-46px;width:34px;height:34px} .timeline::before{left:15px} .city .dates{margin-left:0;width:100%} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="sub">Roteiro da viagem · Itália</div>
+    <h1>Italy Family</h1>
+    <div class="meta">11 – 25 de setembro de 2026 · 4 viajantes · Roma · Florença · Verona · Veneza</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="overview">
+    <a class="chip" href="#roma"><div class="thumb"><img src="imgs/italy-family/colosseum.jpg" alt="Roma"><span class="emo">🏛️</span></div><div class="cbody"><div class="city">Roma</div><div class="dt">13 – 18/09</div><span class="st done">Pronto</span></div></a>
+    <a class="chip" href="#florenca"><div class="thumb"><img src="imgs/italy-family/florence.jpg" alt="Florença"><span class="emo">🎨</span></div><div class="cbody"><div class="city">Florença</div><div class="dt">18 – 21/09</div><span class="st done">Pronto</span></div></a>
+    <a class="chip" href="#verona"><div class="thumb"><img src="imgs/italy-family/verona.jpg" alt="Verona"><span class="emo">🏟️</span></div><div class="cbody"><div class="city">Verona</div><div class="dt">21 – 23/09</div><span class="st done">Pronto</span></div></a>
+    <a class="chip" href="#veneza"><div class="thumb"><img src="imgs/italy-family/venice.jpg" alt="Veneza"><span class="emo">🚤</span></div><div class="cbody"><div class="city">Veneza</div><div class="dt">23 – 24/09</div><span class="st done">Pronto</span></div></a>
+    <a class="chip" href="#roma-volta"><div class="thumb"><img src="imgs/italy-family/trevi.jpg" alt="Roma volta"><span class="emo">🏛️</span></div><div class="cbody"><div class="city">Roma (volta)</div><div class="dt">24 – 25/09</div><span class="st done">Pronto</span></div></a>
+  </div>
+
+  <!-- ============================ ROMA ============================ -->
+  <div class="city" id="roma">
+    <span class="flag">🏛️</span>
+    <h2>Roma</h2>
+    <span class="status done">✓ Pronto</span>
+    <span class="dates">13 – 18 de setembro · Chegada FCO 13/09 às 00:15</span>
+  </div>
+
+  <div class="subh">🎟️ Ingressos</div>
+  <div class="tickets">
+    <div class="tk vat">
+      <div class="tag">Confirmado</div>
+      <h3>Museus do Vaticano + Capela Sistina</h3>
+      <div class="when">Terça, 15/09/2026 · 16:30 · 4 pax</div>
+      <span class="pill ok">✓ Comprado</span>
+    </div>
+    <div class="tk col">
+      <div class="tag">A comprar</div>
+      <h3>Coliseu + Fórum Romano + Palatino</h3>
+      <div class="when">Alvo: Segunda, 14/09 (manhã) · reserva 17/09</div>
+      <div class="code">ticketing.colosseo.it · abre 15/08 às 09:00 Roma (03:00 BRT)</div>
+      <span class="pill todo">⏳ Pendente</span>
+    </div>
+  </div>
+
+  <div class="subh">🗺️ Linha do tempo</div>
+  <div class="timeline">
+
+    <!-- DIA 1 -->
+    <div class="tl-day">
+      <div class="tl-dot">13</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">13/09</span><span class="w">Domingo · Dia 1</span><span class="walk">🚶 ~1,5 km</span></div>
+          <div class="tl-theme">Chegada &amp; recuperação — dia leve</div>
+          <div class="tl-plan">Chegada 00:15 → direto pro Roma 1 dormir (check-out 11:00). Guardar malas p/ a troca (Roma 2, check-in 17:00) e curtir o <b>centro histórico a pé</b>.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Pantheon,+Roma&amp;waypoints=Piazza+Navona,+Roma&amp;destination=Fontana+di+Trevi,+Roma">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Sant'Eustachio il Caffè</div><div class="fi-note">Melhor espresso de Roma · ao lado do Pantheon · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Sant'Eustachio+il+Caffe+Roma" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Forno Campo de' Fiori</div><div class="fi-note">Pizza al taglio e pão fresco · rota: Navona → Trevi · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Forno+Campo+de+Fiori+Roma" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Giolitti</div><div class="fi-note">Gelateria histórica desde 1900 · perto do Pantheon · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Giolitti+gelateria+Roma" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/pantheon.jpg" alt="Pantheon"><span class="seq">1</span></div><div class="cap"><div class="name">Pantheon</div><div class="note">Templo romano preservado</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/navona.jpg" alt="Piazza Navona"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza Navona</div><div class="note">Fontanas de Bernini</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/trevi.jpg" alt="Fontana di Trevi"><span class="seq">3</span></div><div class="cap"><div class="name">Fontana di Trevi</div><div class="note">Jogue a moedinha ✨</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 2 -->
+    <div class="tl-day">
+      <div class="tl-dot">14</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">14/09</span><span class="w">Segunda · Dia 2</span><span class="walk">🚶 ~3 km</span></div>
+          <div class="tl-theme">Roma Antiga — dia do Coliseu</div>
+          <div class="tl-plan">Manhã ~09:00 na <b>Roma Antiga</b> (ingresso combinado). Tarde subindo para Piazza Venezia e o Campidoglio. <b>Obs:</b> Galleria Borghese fecha às segundas.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Colosseo,+Roma&amp;waypoints=Foro+Romano,+Roma%7CMonte+Palatino,+Roma%7CAltare+della+Patria,+Roma&amp;destination=Piazza+del+Campidoglio,+Roma">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Aromaticus</div><div class="fi-note">Bistrô orgânico no bairro Monti · saladas e sanduíches · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Aromaticus+Monti+Roma" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Supplì Roma</div><div class="fi-note">Street food romano · supplì frito clássico · perto do Fórum · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Suppli+Roma+centro" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Terre e Donum</div><div class="fi-note">Aperitivo e taças de vinho no bairro Monti · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Terre+e+Donum+Monti+Roma" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/colosseum.jpg" alt="Coliseu"><span class="seq">1</span><span class="badge">INGRESSO</span></div><div class="cap"><div class="name">Coliseu</div><div class="note">Chegar ~09:00</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/forum.jpg" alt="Fórum Romano"><span class="seq">2</span><span class="badge">INGRESSO</span></div><div class="cap"><div class="name">Fórum Romano</div><div class="note">Mesmo ticket</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/palatine.jpg" alt="Monte Palatino"><span class="seq">3</span><span class="badge">INGRESSO</span></div><div class="cap"><div class="name">Monte Palatino</div><div class="note">Mesmo ticket</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/vittoriano.jpg" alt="Altare della Patria"><span class="seq">4</span></div><div class="cap"><div class="name">Altare della Patria</div><div class="note">Vittoriano · terraço</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/campidoglio.jpg" alt="Campidoglio"><span class="seq">5</span></div><div class="cap"><div class="name">Campidoglio</div><div class="note">Praça de Michelangelo</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 3 -->
+    <div class="tl-day">
+      <div class="tl-dot">15</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">15/09</span><span class="w">Terça · Dia 3</span><span class="walk">🚶 ~3 km</span></div>
+          <div class="tl-theme">Vaticano — tarde travada (16:30)</div>
+          <div class="tl-plan">Manhã livre para <b>São Pedro</b> e <b>Castel Sant'Angelo</b>. À tarde, o horário marcado dos <b>Museus + Capela Sistina</b>.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Basilica+di+San+Pietro,+Vaticano&amp;waypoints=Castel+Sant%27Angelo,+Roma&amp;destination=Musei+Vaticani,+Roma">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Forno Ottaviano</div><div class="fi-note">Pizza al taglio no bairro Prati · clássico e barato · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Forno+Ottaviano+Prati+Roma" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Il Sorpasso</div><div class="fi-note">Bar animado com aperitivo farto · Prati · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Il+Sorpasso+Roma+Prati" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Gelateria Fatamorgana</div><div class="fi-note">Gelatos artesanais únicos · filial em Prati · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Gelateria+Fatamorgana+Prati+Roma" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/stpeter.jpg" alt="Basílica de São Pedro"><span class="seq">1</span></div><div class="cap"><div class="name">Basílica de São Pedro</div><div class="note">Manhã · chegar cedo</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/castel.jpg" alt="Castel Sant'Angelo"><span class="seq">2</span></div><div class="cap"><div class="name">Castel Sant'Angelo</div><div class="note">Meio-dia (opcional)</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/vaticanmuseums.jpg" alt="Museus do Vaticano"><span class="seq">3</span><span class="badge v">16:30 ✓</span></div><div class="cap"><div class="name">Museus do Vaticano</div><div class="note">Ingresso confirmado</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/sistine.jpg" alt="Capela Sistina"><span class="seq">4</span><span class="badge v">✓</span></div><div class="cap"><div class="name">Capela Sistina</div><div class="note">Fim do percurso</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 4 -->
+    <div class="tl-day">
+      <div class="tl-dot">16</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">16/09</span><span class="w">Quarta · Dia 4</span><span class="walk">🚶 ~7 km</span></div>
+          <div class="tl-theme">Centro &amp; Trastevere</div>
+          <div class="tl-plan">Manhã na <b>Piazza di Spagna</b> e Villa Borghese; tarde no centro; noite em <b>Trastevere</b> (melhor bairro p/ jantar — reservar).</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Piazza+di+Spagna,+Roma&amp;waypoints=Piazza+del+Popolo,+Roma%7CVilla+Borghese,+Roma%7CGalleria+Borghese,+Roma%7CCampo+de%27+Fiori,+Roma&amp;destination=Trastevere,+Roma">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Caffè Greco</div><div class="fi-note">Café histórico desde 1760 · Via Condotti (junto à Spagna) · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Caffe+Greco+Roma+Via+Condotti" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Supplì Roma – Campo de' Fiori</div><div class="fi-note">Supplì e street food romano · rota da tarde · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Suppli+Roma+Campo+de+Fiori" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Da Enzo al 29</div><div class="fi-note">Trattoria clássica no Trastevere · reservar! · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Da+Enzo+al+29+Trastevere+Roma" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/spanish.jpg" alt="Piazza di Spagna"><span class="seq">1</span></div><div class="cap"><div class="name">Piazza di Spagna</div><div class="note">Escadaria espanhola</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/popolo.jpg" alt="Piazza del Popolo"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza del Popolo</div><div class="note">Mirante do Pincio</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/borghese.jpg" alt="Villa Borghese"><span class="seq">3</span></div><div class="cap"><div class="name">Villa Borghese</div><div class="note">Parque</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/gallborghese.jpg" alt="Galleria Borghese"><span class="seq">4</span></div><div class="cap"><div class="name">Galleria Borghese</div><div class="note">Opcional · reserva</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/campofiori.jpg" alt="Campo de' Fiori"><span class="seq">5</span></div><div class="cap"><div class="name">Campo de' Fiori</div><div class="note">Mercado + praça</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/trastevere.jpg" alt="Trastevere"><span class="seq">6</span></div><div class="cap"><div class="name">Trastevere</div><div class="note">Jantar à noite 🍝</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 5 -->
+    <div class="tl-day">
+      <div class="tl-dot">17</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">17/09</span><span class="w">Quinta · Dia 5</span><span class="walk">🚶 ~1,5 km + transporte à Appia</span></div>
+          <div class="tl-theme">Bairros, folga &amp; dia coringa</div>
+          <div class="tl-plan">Ritmo leve pelo <b>Aventino</b> e <b>Testaccio</b>, com opção da <b>Appia Antica</b>. Reserva caso o Coliseu não caia na segunda. Organizar malas p/ Florença.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Giardino+degli+Aranci,+Roma&amp;waypoints=Testaccio,+Roma&amp;destination=Via+Appia+Antica,+Roma">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Mercato di Testaccio</div><div class="fi-note">Melhor mercado de rua de Roma · dezenas de bancas · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Mercato+di+Testaccio+Roma" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Mordi e Vai</div><div class="fi-note">Sanduíches de "quinto quarto" no mercado · lendário · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Mordi+e+Vai+Testaccio+Roma" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Trapizzino</div><div class="fi-note">Pizza triangular recheada · inventado aqui em Testaccio · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Trapizzino+Testaccio+Roma" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/aventine.jpg" alt="Giardino degli Aranci"><span class="seq">1</span></div><div class="cap"><div class="name">Giardino degli Aranci</div><div class="note">Mirante + fechadura</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/testaccio.jpg" alt="Testaccio"><span class="seq">2</span></div><div class="cap"><div class="name">Testaccio</div><div class="note">Gastronomia local</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/appia.jpg" alt="Appia Antica"><span class="seq">3</span></div><div class="cap"><div class="name">Appia Antica</div><div class="note">Via romana + catacumbas</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 6 -->
+    <div class="tl-day final">
+      <div class="tl-dot">18</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">18/09</span><span class="w">Sexta · Dia 6</span></div>
+          <div class="tl-theme">Saída para Florença</div>
+          <div class="tl-plan">Check-out 10:00. Ir com antecedência para a estação.</div>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/termini.jpg" alt="Roma Termini"><span class="seq">1</span><span class="badge t">🚆 10:35</span></div><div class="cap"><div class="name">Roma Termini</div><div class="note">Trem 10:35 → Firenze 12:11</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline Roma -->
+
+  <div class="subh">🛒 Compra do Coliseu</div>
+  <div class="box">
+    <h4>Como e quando comprar</h4>
+    <p>Site oficial (único canal): <a href="https://ticketing.colosseo.it/en/ticket/">ticketing.colosseo.it/en/ticket/</a> — Parco Archeologico del Colosseo. Evitar revendedores.</p>
+    <ul>
+      <li><b>Abre 30 dias antes</b>, às <b>09:00 horário de Roma</b>. Para a visita de <b>14/09</b> → <b>15/08/2026</b>, que em Brasília (UTC-3) é <b>03:00</b>. Reserva 17/09 → abre 18/08.</li>
+      <li><b>Ingressos nominais:</b> nome de cada um dos 4 tem que bater <b>exatamente com o passaporte</b>; documento conferido na entrada.</li>
+      <li><b>Não reembolsáveis.</b> Criar conta e deixar <b>logado antes</b> — esgota em segundos (sobretudo Arena / Subterrâneos).</li>
+      <li>Tipos: Padrão 24h <code>€18</code> · Full Experience <code>€22</code> (Arena / Subterrâneos / Ático).</li>
+    </ul>
+  </div>
+
+  <div class="subh">💡 Dicas de Roma</div>
+  <div class="box tip">
+    <ul>
+      <li>Avaliar <b>Roma Pass</b> se fizerem vários pagos (Coliseu, Castel Sant'Angelo, transporte).</li>
+      <li>Reservar restaurantes em <b>Trastevere</b> (16/09) com antecedência.</li>
+      <li>Levar <b>água</b> e reabastecer nas fontes públicas (<i>nasoni</i>) — gratuitas pela cidade.</li>
+      <li>Sapato confortável: o roteiro é bem caminhado, sobretudo dias 14 e 16.</li>
+      <li>Metro <b>Linha A</b> (de Termini/Republica): essencial para Vaticano (→ Ottaviano) e Spagna (→ Spagna).</li>
+    </ul>
+  </div>
+
+  <!-- ============================ FLORENÇA ============================ -->
+  <div class="city" id="florenca">
+    <span class="flag">🎨</span>
+    <h2>Florença</h2>
+    <span class="status done">✓ Pronto</span>
+    <span class="dates">18 – 21 de setembro · Chegada 12:11 · Saída 11:36</span>
+  </div>
+
+  <div class="alert"><span class="ic">⚠️</span><span>Check-in 15:00 · chegam 12:11 — ~3h de espera. Guardar malas na <b>Firenze S.M.N.</b> (consigna no nível -1) e explorar a pé. Airbnb em <b>Santa Croce</b>, bairro central a ~1,5 km da estação.</span></div>
+  <div class="alert"><span class="ic">🎟️</span><span><b>Duomo e Uffizi precisam de reserva antecipada</b> — comprar antes da viagem em <a href="https://www.firenzecard.it" target="_blank" style="color:var(--blue)">firenzecard.it</a> ou <a href="https://www.uffizi.it/en/tickets" target="_blank" style="color:var(--blue)">uffizi.it</a>.</span></div>
+
+  <div class="subh">🗺️ Linha do tempo</div>
+  <div class="timeline">
+
+    <!-- FLORENÇA DIA 1 -->
+    <div class="tl-day">
+      <div class="tl-dot">18</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">18/09</span><span class="w">Sexta · Dia 1</span><span class="walk">🚶 ~2 km</span></div>
+          <div class="tl-theme">Chegada · Santa Croce &amp; Arno</div>
+          <div class="tl-plan">Chega 12:11. Malas na consigna da estação → explore <b>Santa Croce</b> (perto do Airbnb) → <b>Ponte Vecchio</b> ao entardecer. Check-in 15:00 e jantar pelo bairro Oltrarno.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Firenze+Santa+Maria+Novella&amp;waypoints=Basilica+di+Santa+Croce,+Firenze&amp;destination=Ponte+Vecchio,+Firenze">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">All'Antico Vinaio</div><div class="fi-note">Sanduíches lendários · Via dei Neri (perto de Santa Croce) · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=All'Antico+Vinaio+Firenze" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Gelateria dei Neri</div><div class="fi-note">Gelato excelente · Via dei Neri · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Gelateria+dei+Neri+Firenze" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Buca Mario</div><div class="fi-note">Trattoria animada em Oltrarno · jantar · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Buca+Mario+Firenze+Oltrarno" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/santa_croce_florence.jpg" alt="Santa Croce"><span class="seq">1</span></div><div class="cap"><div class="name">Basilica di Santa Croce</div><div class="note">Túmulo de Michelangelo</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_vecchio.jpg" alt="Ponte Vecchio"><span class="seq">2</span></div><div class="cap"><div class="name">Ponte Vecchio</div><div class="note">Ponte das joalherias ao pôr do sol</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/trastevere.jpg" alt="Oltrarno"><span class="seq">3</span></div><div class="cap"><div class="name">Oltrarno</div><div class="note">Jantar no bairro artesão</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLORENÇA DIA 2 -->
+    <div class="tl-day">
+      <div class="tl-dot">19</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">19/09</span><span class="w">Sábado · Dia 2</span><span class="walk">🚶 ~3 km</span></div>
+          <div class="tl-theme">Duomo &amp; Uffizi — dia cheio</div>
+          <div class="tl-plan">Manhã no complexo do <b>Duomo</b> (cúpula de Brunelleschi, Battistero, Campanile — reservar!). Tarde: <b>Piazza della Signoria</b> → <b>Galleria degli Uffizi</b> (reserva obrigatória). Noite: volta pelo Ponte Vecchio.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Cattedrale+di+Santa+Maria+del+Fiore,+Firenze&amp;waypoints=Battistero+di+San+Giovanni,+Firenze%7CPiazza+della+Signoria,+Firenze&amp;destination=Galleria+degli+Uffizi,+Firenze">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Mercato Centrale di Firenze</div><div class="fi-note">Mercado gourmet coberto · a 10 min do Duomo · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Mercato+Centrale+Firenze" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Ino – Gastronomia</div><div class="fi-note">Sanduíches artesanais junto aos Uffizi · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Ino+gastronomia+Firenze+Uffizi" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Gelateria La Carraia</div><div class="fi-note">Um dos melhores gelatos de Florença · perto do Ponte Vecchio · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Gelateria+La+Carraia+Firenze" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/duomo_florence.jpg" alt="Duomo Florença"><span class="seq">1</span><span class="badge">RESERVA</span></div><div class="cap"><div class="name">Duomo · Cúpula</div><div class="note">Brunelleschi · subir cedo</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/baptistery_florence.jpg" alt="Battistero"><span class="seq">2</span></div><div class="cap"><div class="name">Battistero San Giovanni</div><div class="note">Portas do Paraíso</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_signoria.jpg" alt="Piazza Signoria"><span class="seq">3</span></div><div class="cap"><div class="name">Piazza della Signoria</div><div class="note">Palazzo Vecchio + esculturas</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/uffizi.jpg" alt="Uffizi"><span class="seq">4</span><span class="badge">RESERVA</span></div><div class="cap"><div class="name">Galleria degli Uffizi</div><div class="note">Botticelli, Leonardo…</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLORENÇA DIA 3 -->
+    <div class="tl-day">
+      <div class="tl-dot">20</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">20/09</span><span class="w">Domingo · Dia 3</span><span class="walk">🚂 Pisa + Lucca + 🚶 ~3 km</span></div>
+          <div class="tl-theme">Bate-volta Pisa &amp; Lucca + pôr do sol no Piazzale</div>
+          <div class="tl-plan">Saída cedo: trem para <b>Pisa</b> (~1h). <b>Campo dei Miracoli</b>: Torre, Duomo, Battistero (~2h). Trem Pisa → <b>Lucca</b> (~30 min): caminhe (ou pedale!) nas <b>Mura</b> e explore a <b>Piazza dell'Anfiteatro</b> com almoço por ali (~2h). Trem de volta a Florença ~15:30 (~1h15). Final de tarde: <b>Piazzale Michelangelo</b> para o <b>pôr do sol</b>. Jantar de despedida em Oltrarno.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Pisa+Centrale&amp;destination=Campo+dei+Miracoli,+Pisa">🗺️ Pisa: Estação → Campo dei Miracoli</a>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Lucca+train+station&amp;waypoints=Mura+di+Lucca&amp;destination=Piazza+dell'Anfiteatro,+Lucca">🗺️ Lucca: Estação → Mura → Anfiteatro</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Il Montino – Pisa</div><div class="fi-note">Pizzeria clássica perto do Campo dei Miracoli · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Il+Montino+pizzeria+Pisa" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Trattoria da Leo – Lucca</div><div class="fi-note">Almoço tradicional toscano · muito frequentado por locais · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Trattoria+da+Leo+Lucca" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Buca di Sant'Antonio – Lucca</div><div class="fi-note">Restaurante histórico no centro de Lucca desde 1782 · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Buca+di+Sant'Antonio+Lucca" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Golden View Open Bar – Florença</div><div class="fi-note">Aperitivo com vista do Ponte Vecchio · ao voltar · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Golden+View+Open+Bar+Firenze" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/torre_pisa.jpg" alt="Torre de Pisa"><span class="seq">1</span></div><div class="cap"><div class="name">Torre Inclinada de Pisa</div><div class="note">~1h de trem de Florença</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/campo_miracoli.jpg" alt="Campo dei Miracoli"><span class="seq">2</span></div><div class="cap"><div class="name">Campo dei Miracoli</div><div class="note">Duomo + Battistero + Torre</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/lucca_walls.jpg" alt="Mura di Lucca"><span class="seq">3</span><span class="badge w">~30 min de Pisa</span></div><div class="cap"><div class="name">Mura di Lucca</div><div class="note">Caminhar (ou pedalar!) sobre as muralhas</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/lucca_anfiteatro.jpg" alt="Piazza Anfiteatro"><span class="seq">4</span></div><div class="cap"><div class="name">Piazza dell'Anfiteatro</div><div class="note">Praça elíptica sobre ruínas romanas</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazzale_michelangelo.jpg" alt="Piazzale Michelangelo"><span class="seq">5</span></div><div class="cap"><div class="name">Piazzale Michelangelo</div><div class="note">Pôr do sol com vista de Florença 🌅</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_vecchio.jpg" alt="Oltrarno"><span class="seq">6</span></div><div class="cap"><div class="name">Oltrarno</div><div class="note">Jantar de despedida</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLORENÇA DIA 4 (saída) -->
+    <div class="tl-day final">
+      <div class="tl-dot">21</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">21/09</span><span class="w">Segunda · Saída</span></div>
+          <div class="tl-theme">Saída para Verona</div>
+          <div class="tl-plan">Check-out 11:00 → estação. <b>Atenção:</b> Firenze S.M.N. fica a ~1,5 km do Airbnb (15 min a pé ou táxi). Sair com antecedência — malas pesadas.</div>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/florence.jpg" alt="Firenze S.M.N."><span class="seq">1</span><span class="badge t">🚆 11:36</span></div><div class="cap"><div class="name">Firenze S.M.N.</div><div class="note">Trem 11:36 → Verona 13:08</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline Florença -->
+
+  <div class="subh">💡 Dicas de Florença</div>
+  <div class="box tip">
+    <ul>
+      <li><b>Firenze Card (€85)</b>: acesso a 72 museus por 72h, inclui Uffizi e Accademia sem filas. Vale a pena se visitar 3+ museus. Comprar online em <a href="https://www.firenzecard.it" target="_blank">firenzecard.it</a>.</li>
+      <li><b>Galeria dell'Accademia</b> (David original de Michelangelo): reservar antecipado — pode encaixar no Dia 2.</li>
+      <li>Florença é muito caminhável — tudo no centro histórico está a ≤2 km.</li>
+      <li>Clima: setembro ainda quente. Duomo exige ombros e joelhos cobertos.</li>
+    </ul>
+  </div>
+  <div class="box info">
+    <h4>🚂 Pisa + Lucca — como organizar o dia (Dia 3 · 20/09)</h4>
+    <ul>
+      <li><b>08:30</b> — Trem Firenze S.M.N. → Pisa Centrale (~1h). Comprar na máquina ou app Trenitalia (~€9).</li>
+      <li><b>09:30–11:30</b> — <b>Campo dei Miracoli</b>: Torre Inclinada, Duomo, Battistero (~2h). Ingresso da Torre antecipado em <a href="https://www.opapisa.it" target="_blank">opapisa.it</a> — esgota!</li>
+      <li><b>11:30–12:00</b> — Trem Pisa Centrale → Lucca (~30 min, regional ~€4). Trens saem a cada hora.</li>
+      <li><b>12:00–15:00</b> — <b>Lucca</b>: almoço perto da estação, depois passeio (ou bicicleta alugada ~€3/h) nas <b>Mura</b> e <b>Piazza dell'Anfiteatro</b>. Considere subir a <b>Torre Guinigi</b> (carvalhos no topo!).</li>
+      <li><b>15:30</b> — Trem Lucca → Firenze S.M.N. (~1h15 direto).</li>
+      <li><b>~17:00–18:30</b> — <b>Piazzale Michelangelo</b> para o pôr do sol (~18:30 em setembro) — melhor vista de Florença.</li>
+    </ul>
+  </div>
+
+  <!-- ============================ VERONA ============================ -->
+  <div class="city" id="verona">
+    <span class="flag">🏟️</span>
+    <h2>Verona</h2>
+    <span class="status done">✓ Pronto</span>
+    <span class="dates">21 – 23 de setembro · Chegada 13:08 · Saída 08:30 ⚠️</span>
+  </div>
+
+  <div class="alert"><span class="ic">⚠️</span><span><b>Saída muito cedo:</b> trem em <b>08:30 do dia 23</b>, mas check-out oficial é 10:00. Alinhar com o anfitrião para deixar as malas e sair antes das 08:00. Não perder esse trem — conecta com Veneza.</span></div>
+  <div class="alert"><span class="ic">🎟️</span><span>Arena di Verona e Teatro Romano têm ingressos separados. Galleria d'Arte Moderna e Teatro Romano fecham às <b>segundas</b> — o dia 21/09 é segunda, então chegam em dia de restrição.</span></div>
+
+  <div class="subh">🗺️ Linha do tempo</div>
+  <div class="timeline">
+
+    <!-- VERONA DIA 1 -->
+    <div class="tl-day">
+      <div class="tl-dot">21</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">21/09</span><span class="w">Segunda · Dia 1</span><span class="walk">🚶 ~2 km</span></div>
+          <div class="tl-theme">Chegada · Arena &amp; Centro</div>
+          <div class="tl-plan">Chega 13:08 na Porta Nuova. Malas na consigna → <b>Piazza Bra</b> e <b>Arena</b> (exterior, ou entrar com ingresso). Check-in 16:00. À noite, <b>Piazza delle Erbe</b> e aperitivo no centro histórico.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Verona+Porta+Nuova&amp;waypoints=Piazza+Bra,+Verona&amp;destination=Piazza+delle+Erbe,+Verona">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Osteria del Bugiardo</div><div class="fi-note">Wine bar animado · Corso Porta Borsari · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Osteria+del+Bugiardo+Verona" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Gelateria Savoia</div><div class="fi-note">Gelateria histórica perto da Arena · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Gelateria+Savoia+Verona" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Caffè delle Erbe</div><div class="fi-note">Bar na própria Piazza delle Erbe · aperitivo · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Caffe+delle+Erbe+Verona+Piazza" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/arena_verona.jpg" alt="Arena di Verona"><span class="seq">1</span></div><div class="cap"><div class="name">Arena di Verona</div><div class="note">Anfiteatro romano · Piazza Bra</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_erbe_verona.jpg" alt="Piazza delle Erbe"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza delle Erbe</div><div class="note">Coração histórico de Verona</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERONA DIA 2 -->
+    <div class="tl-day">
+      <div class="tl-dot">22</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">22/09</span><span class="w">Terça · Dia 2</span><span class="walk">🚶 ~4 km</span></div>
+          <div class="tl-theme">Romeo &amp; Julieta · Castelvecchio</div>
+          <div class="tl-plan">Manhã: <b>Casa di Giulietta</b> (varanda do balcão) e centro histórico. Tarde: <b>Castelvecchio</b> + <b>Ponte Scaligero</b> sobre o Adige. Organizar malas para o trem das 08:30.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Casa+di+Giulietta,+Verona&amp;waypoints=Piazza+delle+Erbe,+Verona%7CArco+dei+Gavi,+Verona&amp;destination=Castelvecchio,+Verona">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Bottega del Vino</div><div class="fi-note">Wine bar clássico desde 1890 · centro histórico · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Bottega+del+Vino+Verona" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Mercato di Piazza delle Erbe</div><div class="fi-note">Bancas de frutas e lanche fresco · centro · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Mercato+Piazza+delle+Erbe+Verona" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Pasticceria Bar Coloniale</div><div class="fi-note">Café, doces e aperitivo · Verona centro · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Pasticceria+Bar+Coloniale+Verona" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/casa_giulietta.jpg" alt="Casa di Giulietta"><span class="seq">1</span></div><div class="cap"><div class="name">Casa di Giulietta</div><div class="note">O famoso balcão</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_erbe_verona.jpg" alt="Piazza delle Erbe"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza dei Signori</div><div class="note">Scaligeri, loggia, torre</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/castelvecchio.jpg" alt="Castelvecchio"><span class="seq">3</span></div><div class="cap"><div class="name">Castelvecchio</div><div class="note">Museu + forteza medieval</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_scaligero.jpg" alt="Ponte Scaligero"><span class="seq">4</span></div><div class="cap"><div class="name">Ponte Scaligero</div><div class="note">Vista do rio Adige</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERONA SAÍDA -->
+    <div class="tl-day final">
+      <div class="tl-dot">23</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">23/09</span><span class="w">Quarta · Saída</span></div>
+          <div class="tl-theme">Saída para Veneza — cedo!</div>
+          <div class="tl-plan"><b>Trem às 08:30</b> — sair do Airbnb às ~07:45 no máximo. Organizar malas na noite anterior. Acordar cedo.</div>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/verona.jpg" alt="Verona Porta Nuova"><span class="seq">1</span><span class="badge t">🚆 08:30</span></div><div class="cap"><div class="name">Verona Porta Nuova</div><div class="note">Trem 08:30 → Venezia 09:42</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline Verona -->
+
+  <div class="subh">💡 Dicas de Verona</div>
+  <div class="box tip">
+    <ul>
+      <li>Verona é pequena e muito caminhável — todo o centro histórico cabe em 2 dias tranquilos.</li>
+      <li><b>Arena di Verona:</b> se houver ópera em cartaz nos dias 21-22/09, considere comprar ingresso — experiência única. Verificar em <a href="https://www.arena.it" target="_blank">arena.it</a>.</li>
+      <li><b>Giardino Giusti</b> (jardim renascentista): bela opção se sobrar tempo no Dia 2 — fica a 15 min a pé do centro.</li>
+      <li>Acordar cedo no dia 23 é obrigatório — o trem das 08:30 não pode ser perdido.</li>
+    </ul>
+  </div>
+
+  <!-- ============================ VENEZA ============================ -->
+  <div class="city" id="veneza">
+    <span class="flag">🚤</span>
+    <h2>Veneza</h2>
+    <span class="status done">✓ Pronto</span>
+    <span class="dates">23 – 24 de setembro · Chegada 09:42 · Saída 15:26</span>
+  </div>
+
+  <div class="alert"><span class="ic">📍</span><span>Airbnb em <b>Cannaregio</b> — bairro a 5 min a pé da Estação Santa Lucia. Excelente localização: menos turístico, mas fácil acesso a tudo de vaporetto.</span></div>
+  <div class="alert"><span class="ic">⚠️</span><span>Check-in 15:00, mas chegam às 09:42 — ~5h livres. Deixar malas na consigna da estação (logo na saída da S. Lucia) e sair de mãos livres para a manhã.</span></div>
+
+  <div class="subh">🗺️ Linha do tempo</div>
+  <div class="timeline">
+
+    <!-- VENEZA DIA 1 -->
+    <div class="tl-day">
+      <div class="tl-dot">23</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">23/09</span><span class="w">Quarta · Dia 1</span><span class="walk">🚶 ~3 km</span></div>
+          <div class="tl-theme">Chegada · Rialto &amp; San Marco</div>
+          <div class="tl-plan">Chega 09:42. Malas na consigna → caminhe pela <b>Rua dos Óculos</b> até o <b>Ponte di Rialto</b>. Explore <b>Piazza San Marco</b>, a Basílica e o <b>Palazzo Ducale</b>. Check-in 15:00 em Cannaregio → tarde relaxada pelo canal do bairro.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Venezia+Santa+Lucia&amp;waypoints=Ponte+di+Rialto,+Venezia&amp;destination=Piazza+San+Marco,+Venezia">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Bacareto Da Lele</div><div class="fi-note">Cicchetti e vinho a preços locais · perto de S. Lucia · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Bacareto+Da+Lele+Venezia" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">All'Arco</div><div class="fi-note">Cicchetti clássicos perto do Rialto · favorito dos locais · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=All'Arco+cicchetti+Venezia+Rialto" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Pasticceria Tonolo</div><div class="fi-note">Pastéis venezianos e café · Dorsoduro · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Pasticceria+Tonolo+Venezia+Dorsoduro" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_rialto.jpg" alt="Ponte Rialto"><span class="seq">1</span></div><div class="cap"><div class="name">Ponte di Rialto</div><div class="note">Mercado ao redor · foto icônica</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_san_marco.jpg" alt="Piazza San Marco"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza San Marco</div><div class="note">Basílica + Campanile</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/palazzo_ducale.jpg" alt="Palazzo Ducale"><span class="seq">3</span></div><div class="cap"><div class="name">Palazzo Ducale</div><div class="note">Palácio do Doge · opcional entrar</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/canal_grande.jpg" alt="Canal Grande"><span class="seq">4</span></div><div class="cap"><div class="name">Canal Grande</div><div class="note">Vaporetto linha 1 · mais barato que gôndola</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/cannaregio.jpg" alt="Cannaregio"><span class="seq">5</span></div><div class="cap"><div class="name">Cannaregio</div><div class="note">Bairro do Airbnb · aperitivo</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VENEZA DIA 2 -->
+    <div class="tl-day">
+      <div class="tl-dot">24</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">24/09</span><span class="w">Quinta · Dia 2</span><span class="walk">🚶 ~2 km + vaporetto</span></div>
+          <div class="tl-theme">Dorsoduro &amp; adeus a Veneza</div>
+          <div class="tl-plan">Check-out 10:00. Explore <b>Dorsoduro</b> (bairro dos estudantes, sem turistas). Opcional: <b>Murano</b> de vaporetto (~30 min — ver vidro soprado). Voltar para a estação até ~14:30. <b>Trem 15:26 → Roma.</b></div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Cannaregio,+Venezia&amp;waypoints=Ponte+dell+Accademia,+Venezia&amp;destination=Venezia+Santa+Lucia">🗺️ Ver rota no Google Maps</a>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Cantina del Vino già Schiavi</div><div class="fi-note">Wine bar clássico em Dorsoduro · cicchetti e taças · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Cantina+del+Vino+gia+Schiavi+Venezia" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Pasticceria Tonolo</div><div class="fi-note">Melhor pastelaria de Dorsoduro · café e croissant · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Pasticceria+Tonolo+Venezia" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Casin dei Nobili</div><div class="fi-note">Aperitivo veneziano · Dorsoduro · bom antes do trem · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Casin+dei+Nobili+Venezia+Dorsoduro" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/canal_grande.jpg" alt="Dorsoduro"><span class="seq">1</span></div><div class="cap"><div class="name">Dorsoduro</div><div class="note">Ponte Accademia · bairro local</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_rialto.jpg" alt="Murano"><span class="seq">2</span></div><div class="cap"><div class="name">Murano (opcional)</div><div class="note">Vaporetto 45 min · vidro veneziano</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/venice.jpg" alt="Santa Lucia"><span class="seq">3</span><span class="badge t">🚆 15:26</span></div><div class="cap"><div class="name">Venezia S. Lucia</div><div class="note">Trem 15:26 → Roma 19:25</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline Veneza -->
+
+  <div class="subh">💡 Dicas de Veneza</div>
+  <div class="box tip">
+    <ul>
+      <li><b>Se perder é normal</b> — e parte do charme. Desligue o GPS de vez em quando.</li>
+      <li><b>Vaporetto</b> (linha 1 ou 2 pelo Canal Grande): muito mais barato que gôndola e igualmente bonito. Cartão de 24h ~€25.</li>
+      <li>Água alta (acqua alta): setembro tem baixo risco, mas vale baixar o app <a href="https://www.comune.venezia.it/it/content/centro-previsioni-e-segnalazioni-maree" target="_blank" style="color:var(--blue)">Centro Maree</a>.</li>
+      <li>Comer longe de San Marco economiza 50% — dois quarteirões já muda tudo.</li>
+      <li><b>Murano</b>: se quiserem ir, sair cedo (10:00) para ter tempo antes do trem das 15:26.</li>
+    </ul>
+  </div>
+
+  <!-- ============================ ROMA (VOLTA) ============================ -->
+  <div class="city" id="roma-volta">
+    <span class="flag">🏛️</span>
+    <h2>Roma (volta)</h2>
+    <span class="status done">✓ Pronto</span>
+    <span class="dates">24 – 25 de setembro · Chegada 19:25 · Voo 13:00</span>
+  </div>
+
+  <div class="alert"><span class="ic">📍</span><span>Airbnb em <b>Esquilino (Via Principe Eugenio)</b> — a 5 min a pé da Roma Termini. Perfeito: chegam do trem às 19:25 e o apartamento fica a caminho.</span></div>
+  <div class="alert"><span class="ic">✈️</span><span><b>Logística do aeroporto:</b> FCO fica a ~35 min de Termini pelo <b>Leonardo Express</b> (sai a cada 30 min, ~€14). Check-out 10:00 → ir direto para Termini → Leonardo Express ~10:15 → FCO ~10:50 → embarque com 2h+ de sobra. Não arranjar compromissos na manhã do dia 25.</span></div>
+
+  <div class="subh">🗺️ Última noite</div>
+  <div class="timeline">
+
+    <!-- ROMA VOLTA DIA 1 -->
+    <div class="tl-day">
+      <div class="tl-dot">24</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">24/09</span><span class="w">Quinta · Chegada</span></div>
+          <div class="tl-theme">Última noite em Roma</div>
+          <div class="tl-plan">Chega 19:25 na Roma Termini → 5 min a pé até o Airbnb. Jantar no <b>Esquilino</b> (bairro multiétnico, ótima comida). Passeio noturno opcional até a <b>Fontana di Trevi</b> (~20 min a pé) — linda à noite, sem o rush do dia.</div>
+          <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Said dal 1923</div><div class="fi-note">Chocolateria e bistrô histórico no Esquilino · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Said+dal+1923+Roma+Esquilino" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Mercato Esquilino</div><div class="fi-note">Mercado multiétnico · comida do mundo · Via Principe Amedeo · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Mercato+Esquilino+Roma" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Pizzeria Formula Uno</div><div class="fi-note">Pizza romana clássica no Esquilino · jantar descontraído · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Formula+Uno+Roma+Esquilino" target="_blank">📍 Maps</a></div>
+          </div></details>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/termini.jpg" alt="Termini"><span class="seq">1</span><span class="badge t">🚆 19:25</span></div><div class="cap"><div class="name">Roma Termini</div><div class="note">Chegada do trem</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/trevi.jpg" alt="Trevi de noite"><span class="seq">2</span></div><div class="cap"><div class="name">Fontana di Trevi</div><div class="note">À noite — muito mais tranquila ✨</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROMA VOLTA DIA 2 (aeroporto) -->
+    <div class="tl-day final">
+      <div class="tl-dot">25</div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-date"><span class="d">25/09</span><span class="w">Sexta · Volta</span></div>
+          <div class="tl-theme">Aeroporto FCO — fim da viagem ✈️</div>
+          <div class="tl-plan">Check-out 10:00 → Termini (~5 min a pé) → <b>Leonardo Express</b> direto ao FCO (~32 min). Chegar no aeroporto às ~10:50. Voo 13:00 com 2h+ de sobra.</div>
+        </div>
+        <div class="stops">
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/termini.jpg" alt="Termini"><span class="seq">1</span></div><div class="cap"><div class="name">Roma Termini</div><div class="note">Leonardo Express → FCO</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/colosseum.jpg" alt="FCO"><span class="seq">2</span><span class="badge t">✈️ 13:00</span></div><div class="cap"><div class="name">Aeroporto FCO</div><div class="note">Voo 13:00 · arrivederci! 🇮🇹</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline Roma volta -->
+
+  <div class="subh">💡 Dicas finais</div>
+  <div class="box tip">
+    <ul>
+      <li><b>Leonardo Express</b>: sai da plataforma 23/24 de Termini. Comprar bilhete antes (máquinas ou app Trenitalia). Não pegar trens regionais — demoram o dobro.</li>
+      <li>Deixar espaço na mala para lembranças — especialmente após Florença (artesanato) e Veneza (vidro de Murano).</li>
+      <li>Conferir passaportes e documentos na noite do dia 24 antes de dormir.</li>
+      <li>27h de viagem de volta — merece um jantar especial em Esquilino antes de descansar.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Roteiro <b>Italy Family</b> · 11 – 25 de setembro de 2026 · fotos locais em <code>imgs/italy-family/</code> (offline) · imagens: Wikimedia Commons.
+  </footer>
+
+</div>
+</body>
+</html>
