@@ -112,6 +112,10 @@
   .stop .cap{padding:9px 11px}
   .stop .cap .name{font-weight:700;font-size:14px;line-height:1.2}
   .stop .cap .note{color:var(--muted);font-size:12px;margin-top:2px}
+  .audio-link{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;
+    color:#6b7894;text-decoration:none;margin-top:6px;padding:2px 7px;border-radius:4px;
+    border:1px solid var(--line);background:#000;transition:color .15s,border-color .15s;letter-spacing:.3px}
+  .audio-link:hover{color:var(--accent);border-color:rgba(224,176,74,.4)}
 
   /* BOX */
   .box{background:var(--card2);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:12px;padding:18px 20px;margin:10px 0}
@@ -152,6 +156,33 @@
 
   footer{color:var(--muted);text-align:center;margin-top:50px;font-size:13px}
   @media(max-width:640px){ .hero h1{font-size:36px} .tickets{grid-template-columns:1fr} .timeline{padding-left:46px} .tl-dot{left:-46px;width:34px;height:34px} .timeline::before{left:15px} .city .dates{margin-left:0;width:100%} }
+
+  /* ---- Reservas checklist ---- */
+  .res-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .res-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+  .res-item.done{opacity:.55}
+  .res-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center}
+  .res-body{flex:1;min-width:0}
+  .res-name{font-weight:700;font-size:13.5px;color:var(--fg)}
+  .res-meta{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .res-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:4px;white-space:nowrap;flex-shrink:0}
+  .res-badge.ok{background:rgba(74,224,125,.12);color:#4ae07d;border:1px solid rgba(74,224,125,.3)}
+  .res-badge.urgent{background:rgba(224,74,74,.13);color:#e05858;border:1px solid rgba(224,74,74,.35)}
+  .res-badge.pending{background:rgba(224,176,74,.12);color:var(--accent);border:1px solid rgba(224,176,74,.3)}
+  .res-link{font-size:11px;font-weight:700;color:var(--blue);text-decoration:none;padding:3px 9px;border:1px solid rgba(100,149,237,.3);border-radius:4px;white-space:nowrap;flex-shrink:0;transition:border-color .15s}
+  .res-link:hover{border-color:rgba(100,149,237,.7)}
+  .stop .badge.r{background:#b03a1e;color:#fff;border:none}
+
+  /* ---- Countdown ---- */
+  .countdown{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:18px}
+  .cd-unit{display:flex;flex-direction:column;align-items:center;min-width:58px;
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;padding:10px 14px}
+  .cd-num{font-size:32px;font-weight:800;line-height:1;color:#fff;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+  .cd-label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px}
+  .cd-sep{font-size:28px;font-weight:800;color:rgba(255,255,255,.25);margin-bottom:12px;user-select:none}
+  .cd-gone{font-size:20px;font-weight:700;color:var(--accent);margin-top:14px;letter-spacing:.5px}
+  @media(max-width:480px){.cd-unit{min-width:46px;padding:8px 10px}.cd-num{font-size:26px}.cd-sep{font-size:22px}}
 </style>
 </head>
 <body>
@@ -161,6 +192,15 @@
     <div class="sub">Roteiro da viagem · Itália</div>
     <h1>Italy Family</h1>
     <div class="meta">11 – 25 de setembro de 2026 · 4 viajantes · Roma · Florença · Verona · Veneza</div>
+    <div id="countdown" class="countdown" aria-live="polite">
+      <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-label">dias</span></div>
+      <span class="cd-sep" aria-hidden="true">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">horas</span></div>
+      <span class="cd-sep" aria-hidden="true">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">min</span></div>
+      <span class="cd-sep" aria-hidden="true">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">seg</span></div>
+    </div>
   </div>
 </header>
 
@@ -172,6 +212,25 @@
     <a class="chip" href="#verona"><div class="thumb"><img src="imgs/italy-family/verona.jpg" alt="Verona"><span class="emo">🏟️</span></div><div class="cbody"><div class="city">Verona</div><div class="dt">21 – 23/09</div><span class="st done">Pronto</span></div></a>
     <a class="chip" href="#veneza"><div class="thumb"><img src="imgs/italy-family/venice.jpg" alt="Veneza"><span class="emo">🚤</span></div><div class="cbody"><div class="city">Veneza</div><div class="dt">23 – 24/09</div><span class="st done">Pronto</span></div></a>
     <a class="chip" href="#roma-volta"><div class="thumb"><img src="imgs/italy-family/trevi.jpg" alt="Roma volta"><span class="emo">🏛️</span></div><div class="cbody"><div class="city">Roma (volta)</div><div class="dt">24 – 25/09</div><span class="st done">Pronto</span></div></a>
+  </div>
+
+  <!-- ============================ RESERVAS ============================ -->
+  <div class="subh">🎟️ Reservas Online — checklist</div>
+  <div class="box tip">
+    <p style="margin:0 0 12px;font-size:13px;color:var(--muted)">Organize as compras abaixo <b>antes da viagem</b>. Os marcados como <span style="color:#e05858;font-weight:700">URGENTE</span> esgotam com semanas de antecedência.</p>
+    <ul class="res-list">
+      <!-- FEITOS -->
+      <li class="res-item done"><span class="res-icon">✅</span><div class="res-body"><div class="res-name">Museus do Vaticano + Capela Sistina</div><div class="res-meta">15/09 · 16:30 · 4 pax</div></div><span class="res-badge ok">✓ Comprado</span></li>
+      <li class="res-item done"><span class="res-icon">✅</span><div class="res-body"><div class="res-name">Coliseu + Fórum Romano + Palatino</div><div class="res-meta">14/09 · 13:00 · 4 pax</div></div><span class="res-badge ok">✓ Comprado</span></li>
+      <!-- URGENTE -->
+      <li class="res-item"><span class="res-icon">🔴</span><div class="res-body"><div class="res-name">Galleria Borghese</div><div class="res-meta">16/09 · Roma — obrigatório horário marcado, máx 2h por grupo · esgota semanas antes</div></div><span class="res-badge urgent">URGENTE</span><a class="res-link" href="https://galleriaborghese.beniculturali.it/en/visit/tickets/" target="_blank">🎫 comprar</a></li>
+      <li class="res-item"><span class="res-icon">🔴</span><div class="res-body"><div class="res-name">Cúpula Brunelleschi — Duomo di Firenze</div><div class="res-meta">19/09 · Florença — horários a cada 15 min, vagas limitadas · esgota semanas antes</div></div><span class="res-badge urgent">URGENTE</span><a class="res-link" href="https://www.operaduomo.firenze.it/en/cupola" target="_blank">🎫 comprar</a></li>
+      <li class="res-item"><span class="res-icon">🔴</span><div class="res-body"><div class="res-name">Galleria degli Uffizi</div><div class="res-meta">19/09 · Florença — ingressos esgotam com semanas de antecedência em alta temporada</div></div><span class="res-badge urgent">URGENTE</span><a class="res-link" href="https://www.uffizi.it/en/tickets" target="_blank">🎫 comprar</a></li>
+      <!-- PENDENTE -->
+      <li class="res-item"><span class="res-icon">🟡</span><div class="res-body"><div class="res-name">Pantheon</div><div class="res-meta">13/09 · Roma — ingresso online obrigatório (~€5 pp), evita fila e garante entrada</div></div><span class="res-badge pending">Pendente</span><a class="res-link" href="https://www.pantheonroma.com/en/tickets/" target="_blank">🎫 comprar</a></li>
+      <li class="res-item"><span class="res-icon">🟡</span><div class="res-body"><div class="res-name">Casa di Giulietta — Verona</div><div class="res-meta">22/09 · reserva online obrigatória desde 2026 · entrada pela Piazzetta Navona (Teatro Nuovo)</div></div><span class="res-badge pending">Pendente</span><a class="res-link" href="https://casadigiulietta.comune.verona.it" target="_blank">🎫 comprar</a></li>
+      <li class="res-item"><span class="res-icon">🟡</span><div class="res-body"><div class="res-name">Funivia del Monte Baldo — Malcesine</div><div class="res-meta">22/09 · recomendado comprar online · pode esgotar em setembro</div></div><span class="res-badge pending">Pendente</span><a class="res-link" href="https://www.funiviadelmontebaldo.com" target="_blank">🎫 comprar</a></li>
+    </ul>
   </div>
 
   <!-- ============================ ROMA ============================ -->
@@ -191,11 +250,10 @@
       <span class="pill ok">✓ Comprado</span>
     </div>
     <div class="tk col">
-      <div class="tag">A comprar</div>
+      <div class="tag">Confirmado</div>
       <h3>Coliseu + Fórum Romano + Palatino</h3>
-      <div class="when">Alvo: Segunda, 14/09 (manhã) · reserva 17/09</div>
-      <div class="code">ticketing.colosseo.it · abre 15/08 às 09:00 Roma (03:00 BRT)</div>
-      <span class="pill todo">⏳ Pendente</span>
+      <div class="when">Segunda, 14/09/2026 · 13:00 · 4 pax</div>
+      <span class="pill ok">✓ Comprado</span>
     </div>
   </div>
 
@@ -218,9 +276,9 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/pantheon.jpg" alt="Pantheon"><span class="seq">1</span></div><div class="cap"><div class="name">Pantheon</div><div class="note">Templo romano preservado</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/navona.jpg" alt="Piazza Navona"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza Navona</div><div class="note">Fontanas de Bernini</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/trevi.jpg" alt="Fontana di Trevi"><span class="seq">3</span></div><div class="cap"><div class="name">Fontana di Trevi</div><div class="note">Jogue a moedinha ✨</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/pantheon.jpg" alt="Pantheon"><span class="seq">1</span><span class="badge r">🎟️ reserva</span></div><div class="cap"><div class="name">Pantheon</div><div class="note">Templo romano preservado · ingresso online ~€5</div><a class="audio-link" href="https://www.ricksteves.com/watch-read-listen/audio/audio-tours/italy" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/navona.jpg" alt="Piazza Navona"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza Navona</div><div class="note">Fontanas de Bernini</div><a class="audio-link" href="https://www.ricksteves.com/watch-read-listen/audio/audio-tours/italy" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/trevi.jpg" alt="Fontana di Trevi"><span class="seq">3</span></div><div class="cap"><div class="name">Fontana di Trevi</div><div class="note">Jogue a moedinha ✨</div><a class="audio-link" href="https://izi.travel/en/browse/rome" target="_blank">🎧 guia</a></div></div>
         </div>
       </div>
     </div>
@@ -231,9 +289,9 @@
       <div class="tl-card">
         <div class="tl-top">
           <div class="tl-date"><span class="d">14/09</span><span class="w">Segunda · Dia 2</span><span class="walk">🚶 ~3 km</span></div>
-          <div class="tl-theme">Roma Antiga — dia do Coliseu</div>
-          <div class="tl-plan">Manhã ~09:00 na <b>Roma Antiga</b> (ingresso combinado). Tarde subindo para Piazza Venezia e o Campidoglio. <b>Obs:</b> Galleria Borghese fecha às segundas.</div>
-          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Colosseo,+Roma&amp;waypoints=Foro+Romano,+Roma%7CMonte+Palatino,+Roma%7CAltare+della+Patria,+Roma&amp;destination=Piazza+del+Campidoglio,+Roma">🗺️ Ver rota no Google Maps</a>
+          <div class="tl-theme">Roma Antiga — Coliseu 13:00 🎟️</div>
+          <div class="tl-plan">Manhã: <b>Vittoriano</b> (terraço grátis) → <b>Campidoglio</b> (~09:30). Almoço rápido em Monti. <b>13:00 entrada no Coliseu</b> (ingresso confirmado) → <b>Fórum Romano</b> → <b>Monte Palatino</b>. Jantar em Monti. <b>Obs:</b> Galleria Borghese fecha às segundas.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Altare+della+Patria,+Roma&amp;waypoints=Piazza+del+Campidoglio,+Roma%7CColosseo,+Roma%7CForo+Romano,+Roma&amp;destination=Monte+Palatino,+Roma">🗺️ Ver rota no Google Maps</a>
           <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
             <div class="food-item"><div class="fi-info"><div class="fi-name">Aromaticus</div><div class="fi-note">Bistrô orgânico no bairro Monti · saladas e sanduíches · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Aromaticus+Monti+Roma" target="_blank">📍 Maps</a></div>
             <div class="food-item"><div class="fi-info"><div class="fi-name">Supplì Roma</div><div class="fi-note">Street food romano · supplì frito clássico · perto do Fórum · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Suppli+Roma+centro" target="_blank">📍 Maps</a></div>
@@ -241,11 +299,11 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/colosseum.jpg" alt="Coliseu"><span class="seq">1</span><span class="badge">INGRESSO</span></div><div class="cap"><div class="name">Coliseu</div><div class="note">Chegar ~09:00</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/forum.jpg" alt="Fórum Romano"><span class="seq">2</span><span class="badge">INGRESSO</span></div><div class="cap"><div class="name">Fórum Romano</div><div class="note">Mesmo ticket</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/palatine.jpg" alt="Monte Palatino"><span class="seq">3</span><span class="badge">INGRESSO</span></div><div class="cap"><div class="name">Monte Palatino</div><div class="note">Mesmo ticket</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/vittoriano.jpg" alt="Altare della Patria"><span class="seq">4</span></div><div class="cap"><div class="name">Altare della Patria</div><div class="note">Vittoriano · terraço</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/campidoglio.jpg" alt="Campidoglio"><span class="seq">5</span></div><div class="cap"><div class="name">Campidoglio</div><div class="note">Praça de Michelangelo</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/vittoriano.jpg" alt="Altare della Patria"><span class="seq">1</span></div><div class="cap"><div class="name">Altare della Patria</div><div class="note">Manhã · terraço grátis</div><a class="audio-link" href="https://izi.travel/en/browse/rome" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/campidoglio.jpg" alt="Campidoglio"><span class="seq">2</span></div><div class="cap"><div class="name">Campidoglio</div><div class="note">Praça de Michelangelo</div><a class="audio-link" href="https://izi.travel/en/browse/rome" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/colosseum.jpg" alt="Coliseu"><span class="seq">3</span><span class="badge">13:00 ✓</span></div><div class="cap"><div class="name">Coliseu</div><div class="note">Entrada 13:00 — ingresso confirmado</div><a class="audio-link" href="https://parcocolosseo.it/en/visit/audio-guide/" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/forum.jpg" alt="Fórum Romano"><span class="seq">4</span><span class="badge">INGRESSO</span></div><div class="cap"><div class="name">Fórum Romano</div><div class="note">Mesmo ticket</div><a class="audio-link" href="https://parcocolosseo.it/en/visit/audio-guide/" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/palatine.jpg" alt="Monte Palatino"><span class="seq">5</span><span class="badge">INGRESSO</span></div><div class="cap"><div class="name">Monte Palatino</div><div class="note">Mesmo ticket</div><a class="audio-link" href="https://parcocolosseo.it/en/visit/audio-guide/" target="_blank">🎧 guia oficial</a></div></div>
         </div>
       </div>
     </div>
@@ -266,10 +324,10 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/stpeter.jpg" alt="Basílica de São Pedro"><span class="seq">1</span></div><div class="cap"><div class="name">Basílica de São Pedro</div><div class="note">Manhã · chegar cedo</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/castel.jpg" alt="Castel Sant'Angelo"><span class="seq">2</span></div><div class="cap"><div class="name">Castel Sant'Angelo</div><div class="note">Meio-dia (opcional)</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/vaticanmuseums.jpg" alt="Museus do Vaticano"><span class="seq">3</span><span class="badge v">16:30 ✓</span></div><div class="cap"><div class="name">Museus do Vaticano</div><div class="note">Ingresso confirmado</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/sistine.jpg" alt="Capela Sistina"><span class="seq">4</span><span class="badge v">✓</span></div><div class="cap"><div class="name">Capela Sistina</div><div class="note">Fim do percurso</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/stpeter.jpg" alt="Basílica de São Pedro"><span class="seq">1</span></div><div class="cap"><div class="name">Basílica de São Pedro</div><div class="note">Manhã · chegar cedo</div><a class="audio-link" href="https://www.ricksteves.com/watch-read-listen/audio/audio-tours/italy" target="_blank">🎧 Rick Steves</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/castel.jpg" alt="Castel Sant'Angelo"><span class="seq">2</span></div><div class="cap"><div class="name">Castel Sant'Angelo</div><div class="note">Meio-dia (opcional)</div><a class="audio-link" href="https://izi.travel/en/browse/rome" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/vaticanmuseums.jpg" alt="Museus do Vaticano"><span class="seq">3</span><span class="badge v">16:30 ✓</span></div><div class="cap"><div class="name">Museus do Vaticano</div><div class="note">Ingresso confirmado</div><a class="audio-link" href="https://www.ricksteves.com/watch-read-listen/audio/audio-tours/italy" target="_blank">🎧 Rick Steves</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/sistine.jpg" alt="Capela Sistina"><span class="seq">4</span><span class="badge v">✓</span></div><div class="cap"><div class="name">Capela Sistina</div><div class="note">Fim do percurso</div><a class="audio-link" href="https://www.ricksteves.com/watch-read-listen/audio/audio-tours/italy" target="_blank">🎧 Rick Steves</a></div></div>
         </div>
       </div>
     </div>
@@ -290,12 +348,12 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/spanish.jpg" alt="Piazza di Spagna"><span class="seq">1</span></div><div class="cap"><div class="name">Piazza di Spagna</div><div class="note">Escadaria espanhola</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/popolo.jpg" alt="Piazza del Popolo"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza del Popolo</div><div class="note">Mirante do Pincio</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/spanish.jpg" alt="Piazza di Spagna"><span class="seq">1</span></div><div class="cap"><div class="name">Piazza di Spagna</div><div class="note">Escadaria espanhola</div><a class="audio-link" href="https://www.ricksteves.com/watch-read-listen/audio/audio-tours/italy" target="_blank">🎧 Rick Steves</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/popolo.jpg" alt="Piazza del Popolo"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza del Popolo</div><div class="note">Mirante do Pincio</div><a class="audio-link" href="https://izi.travel/en/browse/rome" target="_blank">🎧 guia</a></div></div>
           <div class="stop"><div class="ph"><img src="imgs/italy-family/borghese.jpg" alt="Villa Borghese"><span class="seq">3</span></div><div class="cap"><div class="name">Villa Borghese</div><div class="note">Parque</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/gallborghese.jpg" alt="Galleria Borghese"><span class="seq">4</span></div><div class="cap"><div class="name">Galleria Borghese</div><div class="note">Opcional · reserva</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/campofiori.jpg" alt="Campo de' Fiori"><span class="seq">5</span></div><div class="cap"><div class="name">Campo de' Fiori</div><div class="note">Mercado + praça</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/trastevere.jpg" alt="Trastevere"><span class="seq">6</span></div><div class="cap"><div class="name">Trastevere</div><div class="note">Jantar à noite 🍝</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/gallborghese.jpg" alt="Galleria Borghese"><span class="seq">4</span><span class="badge r">🎟️ reserva</span></div><div class="cap"><div class="name">Galleria Borghese</div><div class="note">Bernini + Caravaggio · 2h marcadas · reserva obrigatória</div><a class="audio-link" href="https://galleriaborghese.beniculturali.it/en/visit/" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/campofiori.jpg" alt="Campo de' Fiori"><span class="seq">5</span></div><div class="cap"><div class="name">Campo de' Fiori</div><div class="note">Mercado + praça</div><a class="audio-link" href="https://izi.travel/en/browse/rome" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/trastevere.jpg" alt="Trastevere"><span class="seq">6</span></div><div class="cap"><div class="name">Trastevere</div><div class="note">Jantar à noite 🍝</div><a class="audio-link" href="https://www.ricksteves.com/watch-read-listen/audio/audio-tours/italy" target="_blank">🎧 Rick Steves</a></div></div>
         </div>
       </div>
     </div>
@@ -305,20 +363,20 @@
       <div class="tl-dot">17</div>
       <div class="tl-card">
         <div class="tl-top">
-          <div class="tl-date"><span class="d">17/09</span><span class="w">Quinta · Dia 5</span><span class="walk">🚶 ~1,5 km + transporte à Appia</span></div>
-          <div class="tl-theme">Bairros, folga &amp; dia coringa</div>
-          <div class="tl-plan">Ritmo leve pelo <b>Aventino</b> e <b>Testaccio</b>, com opção da <b>Appia Antica</b>. Reserva caso o Coliseu não caia na segunda. Organizar malas p/ Florença.</div>
-          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Giardino+degli+Aranci,+Roma&amp;waypoints=Testaccio,+Roma&amp;destination=Via+Appia+Antica,+Roma">🗺️ Ver rota no Google Maps</a>
+          <div class="tl-date"><span class="d">17/09</span><span class="w">Quinta · Dia 5</span><span class="walk">🚂 Bate-volta Nápoles</span></div>
+          <div class="tl-theme">Vesúvio &amp; Nápoles — bate-volta de trem</div>
+          <div class="tl-plan"><b>~07:30</b> Frecciarossa Roma → Nápoles (~1h10). Circumvesuviana até Ercolano → shuttle ao <b>cratera do Vesúvio</b> (~10:00). Descida e almoço em Nápoles: <b>pizza napoletana obrigatória</b>. Tarde explorando o centro histórico. <b>Trem ~18:00</b> de volta → Roma ~19:15. Jantar leve e malas prontas para o dia 18.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=transit&origin=Napoli+Centrale&waypoints=Ercolano+Scavi&destination=Monte+Vesuvio,+Ercolano">🗺️ Nápoles: Estação → Ercolano → Vesúvio</a>
           <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
-            <div class="food-item"><div class="fi-info"><div class="fi-name">Mercato di Testaccio</div><div class="fi-note">Melhor mercado de rua de Roma · dezenas de bancas · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Mercato+di+Testaccio+Roma" target="_blank">📍 Maps</a></div>
-            <div class="food-item"><div class="fi-info"><div class="fi-name">Mordi e Vai</div><div class="fi-note">Sanduíches de "quinto quarto" no mercado · lendário · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Mordi+e+Vai+Testaccio+Roma" target="_blank">📍 Maps</a></div>
-            <div class="food-item"><div class="fi-info"><div class="fi-name">Trapizzino</div><div class="fi-note">Pizza triangular recheada · inventado aqui em Testaccio · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Trapizzino+Testaccio+Roma" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">L'Antica Pizzeria da Michele</div><div class="fi-note">A pizzaria mais famosa de Nápoles · só margherita e marinara · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=L'Antica+Pizzeria+da+Michele+Napoli" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Pizzeria Di Matteo</div><div class="fi-note">Pizza fritta e tradicional · centro histórico · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Di+Matteo+Napoli" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Caffè Mexico</div><div class="fi-note">Melhor espresso de Nápoles · Piazza Dante · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Caffe+Mexico+Napoli+Piazza+Dante" target="_blank">📍 Maps</a></div>
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/aventine.jpg" alt="Giardino degli Aranci"><span class="seq">1</span></div><div class="cap"><div class="name">Giardino degli Aranci</div><div class="note">Mirante + fechadura</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/testaccio.jpg" alt="Testaccio"><span class="seq">2</span></div><div class="cap"><div class="name">Testaccio</div><div class="note">Gastronomia local</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/appia.jpg" alt="Appia Antica"><span class="seq">3</span></div><div class="cap"><div class="name">Appia Antica</div><div class="note">Via romana + catacumbas</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/vesuvio.jpg" alt="Vesúvio"><span class="seq">1</span></div><div class="cap"><div class="name">Cratera do Vesúvio</div><div class="note">Trilha ao cratera · vista 360° · ~€10</div><a class="audio-link" href="https://www.parcovesuvio.it/en/" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/herculaneum.jpg" alt="Herculano"><span class="seq">2</span></div><div class="cap"><div class="name">Herculano (opcional)</div><div class="note">Mesma parada de trem · ruínas preservadas</div><a class="audio-link" href="https://izi.travel/en/browse/naples" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/napoli.jpg" alt="Nápoles"><span class="seq">3</span></div><div class="cap"><div class="name">Nápoles — centro histórico</div><div class="note">Spaccanapoli · pizza · volta ~18:00</div><a class="audio-link" href="https://izi.travel/en/browse/naples" target="_blank">🎧 guia</a></div></div>
         </div>
       </div>
     </div>
@@ -393,8 +451,8 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/santa_croce_florence.jpg" alt="Santa Croce"><span class="seq">1</span></div><div class="cap"><div class="name">Basilica di Santa Croce</div><div class="note">Túmulo de Michelangelo</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_vecchio.jpg" alt="Ponte Vecchio"><span class="seq">2</span></div><div class="cap"><div class="name">Ponte Vecchio</div><div class="note">Ponte das joalherias ao pôr do sol</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/santa_croce_florence.jpg" alt="Santa Croce"><span class="seq">1</span></div><div class="cap"><div class="name">Basilica di Santa Croce</div><div class="note">Túmulo de Michelangelo</div><a class="audio-link" href="https://izi.travel/en/browse/florence" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_vecchio.jpg" alt="Ponte Vecchio"><span class="seq">2</span></div><div class="cap"><div class="name">Ponte Vecchio</div><div class="note">Ponte das joalherias ao pôr do sol</div><a class="audio-link" href="https://izi.travel/en/browse/florence" target="_blank">🎧 guia</a></div></div>
           <div class="stop"><div class="ph"><img src="imgs/italy-family/trastevere.jpg" alt="Oltrarno"><span class="seq">3</span></div><div class="cap"><div class="name">Oltrarno</div><div class="note">Jantar no bairro artesão</div></div></div>
         </div>
       </div>
@@ -416,10 +474,10 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/duomo_florence.jpg" alt="Duomo Florença"><span class="seq">1</span><span class="badge">RESERVA</span></div><div class="cap"><div class="name">Duomo · Cúpula</div><div class="note">Brunelleschi · subir cedo</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/baptistery_florence.jpg" alt="Battistero"><span class="seq">2</span></div><div class="cap"><div class="name">Battistero San Giovanni</div><div class="note">Portas do Paraíso</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_signoria.jpg" alt="Piazza Signoria"><span class="seq">3</span></div><div class="cap"><div class="name">Piazza della Signoria</div><div class="note">Palazzo Vecchio + esculturas</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/uffizi.jpg" alt="Uffizi"><span class="seq">4</span><span class="badge">RESERVA</span></div><div class="cap"><div class="name">Galleria degli Uffizi</div><div class="note">Botticelli, Leonardo…</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/duomo_florence.jpg" alt="Duomo Florença"><span class="seq">1</span><span class="badge">RESERVA</span></div><div class="cap"><div class="name">Duomo · Cúpula</div><div class="note">Brunelleschi · subir cedo</div><a class="audio-link" href="https://www.operaduomo.firenze.it/en/visitor-info/multimedia-guides" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/baptistery_florence.jpg" alt="Battistero"><span class="seq">2</span></div><div class="cap"><div class="name">Battistero San Giovanni</div><div class="note">Portas do Paraíso</div><a class="audio-link" href="https://www.operaduomo.firenze.it/en/visitor-info/multimedia-guides" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_signoria.jpg" alt="Piazza Signoria"><span class="seq">3</span></div><div class="cap"><div class="name">Piazza della Signoria</div><div class="note">Palazzo Vecchio + esculturas</div><a class="audio-link" href="https://izi.travel/en/browse/florence" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/uffizi.jpg" alt="Uffizi"><span class="seq">4</span><span class="badge">RESERVA</span></div><div class="cap"><div class="name">Galleria degli Uffizi</div><div class="note">Botticelli, Leonardo…</div><a class="audio-link" href="https://www.uffizi.it/en/the-uffizi/audio-guide" target="_blank">🎧 guia oficial</a></div></div>
         </div>
       </div>
     </div>
@@ -442,10 +500,10 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/torre_pisa.jpg" alt="Torre de Pisa"><span class="seq">1</span></div><div class="cap"><div class="name">Torre Inclinada de Pisa</div><div class="note">~1h de trem de Florença</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/campo_miracoli.jpg" alt="Campo dei Miracoli"><span class="seq">2</span></div><div class="cap"><div class="name">Campo dei Miracoli</div><div class="note">Duomo + Battistero + Torre</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/lucca_walls.jpg" alt="Mura di Lucca"><span class="seq">3</span><span class="badge w">~30 min de Pisa</span></div><div class="cap"><div class="name">Mura di Lucca</div><div class="note">Caminhar (ou pedalar!) sobre as muralhas</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/lucca_anfiteatro.jpg" alt="Piazza Anfiteatro"><span class="seq">4</span></div><div class="cap"><div class="name">Piazza dell'Anfiteatro</div><div class="note">Praça elíptica sobre ruínas romanas</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/torre_pisa.jpg" alt="Torre de Pisa"><span class="seq">1</span></div><div class="cap"><div class="name">Torre Inclinada de Pisa</div><div class="note">~1h de trem de Florença</div><a class="audio-link" href="https://www.opapisa.it/en/visit/" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/campo_miracoli.jpg" alt="Campo dei Miracoli"><span class="seq">2</span></div><div class="cap"><div class="name">Campo dei Miracoli</div><div class="note">Duomo + Battistero + Torre</div><a class="audio-link" href="https://www.opapisa.it/en/visit/" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/lucca_walls.jpg" alt="Mura di Lucca"><span class="seq">3</span><span class="badge w">~30 min de Pisa</span></div><div class="cap"><div class="name">Mura di Lucca</div><div class="note">Caminhar (ou pedalar!) sobre as muralhas</div><a class="audio-link" href="https://izi.travel/en/browse/lucca" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/lucca_anfiteatro.jpg" alt="Piazza Anfiteatro"><span class="seq">4</span></div><div class="cap"><div class="name">Piazza dell'Anfiteatro</div><div class="note">Praça elíptica sobre ruínas romanas</div><a class="audio-link" href="https://izi.travel/en/browse/lucca" target="_blank">🎧 guia</a></div></div>
           <div class="stop"><div class="ph"><img src="imgs/italy-family/piazzale_michelangelo.jpg" alt="Piazzale Michelangelo"><span class="seq">5</span></div><div class="cap"><div class="name">Piazzale Michelangelo</div><div class="note">Pôr do sol com vista de Florença 🌅</div></div></div>
           <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_vecchio.jpg" alt="Oltrarno"><span class="seq">6</span></div><div class="cap"><div class="name">Oltrarno</div><div class="note">Jantar de despedida</div></div></div>
         </div>
@@ -500,6 +558,7 @@
 
   <div class="alert"><span class="ic">⚠️</span><span><b>Saída muito cedo:</b> trem em <b>08:30 do dia 23</b>, mas check-out oficial é 10:00. Alinhar com o anfitrião para deixar as malas e sair antes das 08:00. Não perder esse trem — conecta com Veneza.</span></div>
   <div class="alert"><span class="ic">🎟️</span><span>Arena di Verona e Teatro Romano têm ingressos separados. Galleria d'Arte Moderna e Teatro Romano fecham às <b>segundas</b> — o dia 21/09 é segunda, então chegam em dia de restrição.</span></div>
+  <div class="alert"><span class="ic">🚡</span><span><b>Funivia del Monte Baldo (22/09):</b> confirmar horário de funcionamento e disponibilidade em <a href="https://www.funiviadelmontebaldo.com" target="_blank">funiviadelmontebaldo.com</a> antes da viagem — pode fechar para manutenção. Ônibus ATV Linha 164 (Verona → Malcesine): verificar horários em <a href="https://www.atv.verona.it" target="_blank">atv.verona.it</a> pois o horário de setembro pode ser reduzido.</span></div>
 
   <div class="subh">🗺️ Linha do tempo</div>
   <div class="timeline">
@@ -520,8 +579,8 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/arena_verona.jpg" alt="Arena di Verona"><span class="seq">1</span></div><div class="cap"><div class="name">Arena di Verona</div><div class="note">Anfiteatro romano · Piazza Bra</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_erbe_verona.jpg" alt="Piazza delle Erbe"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza delle Erbe</div><div class="note">Coração histórico de Verona</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/arena_verona.jpg" alt="Arena di Verona"><span class="seq">1</span></div><div class="cap"><div class="name">Arena di Verona</div><div class="note">Anfiteatro romano · Piazza Bra</div><a class="audio-link" href="https://www.arena.it/en/visit-arena/information.html" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_erbe_verona.jpg" alt="Piazza delle Erbe"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza delle Erbe</div><div class="note">Coração histórico de Verona</div><a class="audio-link" href="https://izi.travel/en/browse/verona" target="_blank">🎧 guia</a></div></div>
         </div>
       </div>
     </div>
@@ -531,21 +590,21 @@
       <div class="tl-dot">22</div>
       <div class="tl-card">
         <div class="tl-top">
-          <div class="tl-date"><span class="d">22/09</span><span class="w">Terça · Dia 2</span><span class="walk">🚶 ~4 km</span></div>
-          <div class="tl-theme">Romeo &amp; Julieta · Castelvecchio</div>
-          <div class="tl-plan">Manhã: <b>Casa di Giulietta</b> (varanda do balcão) e centro histórico. Tarde: <b>Castelvecchio</b> + <b>Ponte Scaligero</b> sobre o Adige. Organizar malas para o trem das 08:30.</div>
-          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=walking&amp;origin=Casa+di+Giulietta,+Verona&amp;waypoints=Piazza+delle+Erbe,+Verona%7CArco+dei+Gavi,+Verona&amp;destination=Castelvecchio,+Verona">🗺️ Ver rota no Google Maps</a>
+          <div class="tl-date"><span class="d">22/09</span><span class="w">Terça · Dia 2</span><span class="walk">🚌 Bate-volta Lago di Garda</span></div>
+          <div class="tl-theme">Monte Baldo &amp; Malcesine → Verona à tarde</div>
+          <div class="tl-plan"><b>~07:00</b> Ônibus ATV Linha 164 (Verona Porta Nuova → Malcesine, ~1h45). Chegada ~08:45 → <b>Funivia del Monte Baldo</b> (~€25 pp ida e volta, 10 min de subida em cabine giratória). Cume a 1.780m: trilhas e vista 360° do Lago di Garda. Descida e almoço em <b>Malcesine</b> (vilarejo medieval à beira do lago). <b>Ônibus ~14:00</b> de volta → Verona ~15:45. Tarde: <b>Casa di Giulietta</b> + <b>Castelvecchio</b> + Ponte Scaligero. Organizar malas. Dormir cedo — trem às 08:30 amanhã.</div>
+          <a class="maproute" target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=transit&origin=Verona+Porta+Nuova&waypoints=Malcesine,+VR&destination=Funivia+Monte+Baldo,+Malcesine">🗺️ Verona → Malcesine → Funivia</a>
           <details class="food-toggle"><summary>🍽️ Sugestões de lanches nas proximidades</summary><div class="food-list">
-            <div class="food-item"><div class="fi-info"><div class="fi-name">Bottega del Vino</div><div class="fi-note">Wine bar clássico desde 1890 · centro histórico · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Bottega+del+Vino+Verona" target="_blank">📍 Maps</a></div>
-            <div class="food-item"><div class="fi-info"><div class="fi-name">Mercato di Piazza delle Erbe</div><div class="fi-note">Bancas de frutas e lanche fresco · centro · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Mercato+Piazza+delle+Erbe+Verona" target="_blank">📍 Maps</a></div>
-            <div class="food-item"><div class="fi-info"><div class="fi-name">Pasticceria Bar Coloniale</div><div class="fi-note">Café, doces e aperitivo · Verona centro · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Pasticceria+Bar+Coloniale+Verona" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Ristorante Vecchia Malcesine</div><div class="fi-note">Almoço à beira do lago · peixe do Garda · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Ristorante+Vecchia+Malcesine" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Bar/Pizzeria Al Porto</div><div class="fi-note">Pizza e aperitivo no porto de Malcesine · €</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Bar+Al+Porto+Malcesine" target="_blank">📍 Maps</a></div>
+            <div class="food-item"><div class="fi-info"><div class="fi-name">Bottega del Vino</div><div class="fi-note">Jantar em Verona · wine bar clássico desde 1890 · €€</div></div><a class="fi-link" href="https://www.google.com/maps/search/?api=1&query=Bottega+del+Vino+Verona" target="_blank">📍 Maps</a></div>
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/casa_giulietta.jpg" alt="Casa di Giulietta"><span class="seq">1</span></div><div class="cap"><div class="name">Casa di Giulietta</div><div class="note">O famoso balcão</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_erbe_verona.jpg" alt="Piazza delle Erbe"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza dei Signori</div><div class="note">Scaligeri, loggia, torre</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/castelvecchio.jpg" alt="Castelvecchio"><span class="seq">3</span></div><div class="cap"><div class="name">Castelvecchio</div><div class="note">Museu + forteza medieval</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_scaligero.jpg" alt="Ponte Scaligero"><span class="seq">4</span></div><div class="cap"><div class="name">Ponte Scaligero</div><div class="note">Vista do rio Adige</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/monte_baldo.jpg" alt="Monte Baldo"><span class="seq">1</span><span class="badge r">🎟️ reserva</span></div><div class="cap"><div class="name">Monte Baldo — cume</div><div class="note">Funivia · 1.780m · vista 360° do lago · ~€25 pp · comprar online</div><a class="audio-link" href="https://www.funiviadelmontebaldo.com" target="_blank">🎧 funivia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/malcesine.jpg" alt="Malcesine"><span class="seq">2</span></div><div class="cap"><div class="name">Malcesine</div><div class="note">Vilarejo medieval · Castello Scaligero · almoço à beira do lago</div><a class="audio-link" href="https://izi.travel/en/browse/lake-garda" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/casa_giulietta.jpg" alt="Casa di Giulietta"><span class="seq">3</span><span class="badge r">🎟️ reserva</span></div><div class="cap"><div class="name">Casa di Giulietta</div><div class="note">Balcão · entrada pela Piazzetta Navona · reserva online obrigatória · fecha 19:00</div><a class="audio-link" href="https://izi.travel/en/browse/verona" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/castelvecchio.jpg" alt="Castelvecchio"><span class="seq">4</span></div><div class="cap"><div class="name">Castelvecchio + Ponte Scaligero</div><div class="note">Fortaleza medieval + ponte sobre o Adige</div><a class="audio-link" href="https://izi.travel/en/browse/verona" target="_blank">🎧 guia</a></div></div>
         </div>
       </div>
     </div>
@@ -570,10 +629,12 @@
   <div class="subh">💡 Dicas de Verona</div>
   <div class="box tip">
     <ul>
-      <li>Verona é pequena e muito caminhável — todo o centro histórico cabe em 2 dias tranquilos.</li>
+      <li>Verona é pequena e muito caminhável — todo o centro histórico cabe numa tarde tranquila.</li>
       <li><b>Arena di Verona:</b> se houver ópera em cartaz nos dias 21-22/09, considere comprar ingresso — experiência única. Verificar em <a href="https://www.arena.it" target="_blank">arena.it</a>.</li>
-      <li><b>Giardino Giusti</b> (jardim renascentista): bela opção se sobrar tempo no Dia 2 — fica a 15 min a pé do centro.</li>
-      <li>Acordar cedo no dia 23 é obrigatório — o trem das 08:30 não pode ser perdido.</li>
+      <li><b>Monte Baldo (22/09):</b> comprar ingresso da funivia online com antecedência em <a href="https://www.funiviadelmontebaldo.com" target="_blank">funiviadelmontebaldo.com</a> — pode esgotar em alta temporada. Setembro é excelente (menos lotado, sem névoa). Levar casaco — no cume faz frio mesmo em setembro.</li>
+      <li><b>Ônibus ATV Linha 164</b> (Verona Porta Nuova → Malcesine): confirmar horários exatos em <a href="https://www.atv.verona.it" target="_blank">atv.verona.it</a> — o horário de verão pode mudar após 15/09. Embarcar na plataforma de ônibus externos da Porta Nuova.</li>
+      <li><b>Plano B Monte Baldo:</b> se a funivia estiver fechada (manutenção ou mau tempo), o dia pode ser reaproveitado em Verona — Giardino Giusti (jardim renascentista, 15 min a pé do centro) ou visita interna à Arena.</li>
+      <li>Acordar cedo no dia 23 é obrigatório — o trem das <b>08:30 não pode ser perdido</b> (é o único com conexão direta para Veneza).</li>
     </ul>
   </div>
 
@@ -607,9 +668,9 @@
           </div></details>
         </div>
         <div class="stops">
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_rialto.jpg" alt="Ponte Rialto"><span class="seq">1</span></div><div class="cap"><div class="name">Ponte di Rialto</div><div class="note">Mercado ao redor · foto icônica</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_san_marco.jpg" alt="Piazza San Marco"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza San Marco</div><div class="note">Basílica + Campanile</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/palazzo_ducale.jpg" alt="Palazzo Ducale"><span class="seq">3</span></div><div class="cap"><div class="name">Palazzo Ducale</div><div class="note">Palácio do Doge · opcional entrar</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/ponte_rialto.jpg" alt="Ponte Rialto"><span class="seq">1</span></div><div class="cap"><div class="name">Ponte di Rialto</div><div class="note">Mercado ao redor · foto icônica</div><a class="audio-link" href="https://izi.travel/en/browse/venice" target="_blank">🎧 guia</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/piazza_san_marco.jpg" alt="Piazza San Marco"><span class="seq">2</span></div><div class="cap"><div class="name">Piazza San Marco</div><div class="note">Basílica + Campanile</div><a class="audio-link" href="https://www.basilicasanmarco.it/en/visit/services/audio-guides/" target="_blank">🎧 guia oficial</a></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/palazzo_ducale.jpg" alt="Palazzo Ducale"><span class="seq">3</span></div><div class="cap"><div class="name">Palazzo Ducale</div><div class="note">Palácio do Doge · opcional entrar</div><a class="audio-link" href="https://palazzoducale.visitmuve.it/en/plan-your-visit/practical-info/" target="_blank">🎧 guia oficial</a></div></div>
           <div class="stop"><div class="ph"><img src="imgs/italy-family/canal_grande.jpg" alt="Canal Grande"><span class="seq">4</span></div><div class="cap"><div class="name">Canal Grande</div><div class="note">Vaporetto linha 1 · mais barato que gôndola</div></div></div>
           <div class="stop"><div class="ph"><img src="imgs/italy-family/cannaregio.jpg" alt="Cannaregio"><span class="seq">5</span></div><div class="cap"><div class="name">Cannaregio</div><div class="note">Bairro do Airbnb · aperitivo</div></div></div>
         </div>
@@ -682,7 +743,7 @@
         </div>
         <div class="stops">
           <div class="stop"><div class="ph"><img src="imgs/italy-family/termini.jpg" alt="Termini"><span class="seq">1</span><span class="badge t">🚆 19:25</span></div><div class="cap"><div class="name">Roma Termini</div><div class="note">Chegada do trem</div></div></div>
-          <div class="stop"><div class="ph"><img src="imgs/italy-family/trevi.jpg" alt="Trevi de noite"><span class="seq">2</span></div><div class="cap"><div class="name">Fontana di Trevi</div><div class="note">À noite — muito mais tranquila ✨</div></div></div>
+          <div class="stop"><div class="ph"><img src="imgs/italy-family/trevi.jpg" alt="Trevi de noite"><span class="seq">2</span></div><div class="cap"><div class="name">Fontana di Trevi</div><div class="note">À noite — muito mais tranquila ✨</div><a class="audio-link" href="https://izi.travel/en/browse/rome" target="_blank">🎧 guia</a></div></div>
         </div>
       </div>
     </div>
@@ -720,5 +781,44 @@
   </footer>
 
 </div>
+
+<script>
+  (function () {
+    // Início da viagem: 13/09/2026 00:00 no horário LOCAL de quem acessa
+    var target = new Date(2026, 8, 13, 0, 0, 0); // mês é 0-indexed (8 = setembro)
+
+    var elDays  = document.getElementById('cd-days');
+    var elHours = document.getElementById('cd-hours');
+    var elMins  = document.getElementById('cd-mins');
+    var elSecs  = document.getElementById('cd-secs');
+    var elBox   = document.getElementById('countdown');
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function tick() {
+      var now  = new Date();
+      var diff = target - now;
+
+      if (diff <= 0) {
+        // Viagem em andamento ou já passou
+        elBox.innerHTML = '<span class="cd-gone">🇮🇹 Viagem em andamento — Arrivederci!</span>';
+        return;
+      }
+
+      var days  = Math.floor(diff / 86400000);
+      var hours = Math.floor((diff % 86400000) / 3600000);
+      var mins  = Math.floor((diff % 3600000)  / 60000);
+      var secs  = Math.floor((diff % 60000)    / 1000);
+
+      elDays.textContent  = days;
+      elHours.textContent = pad(hours);
+      elMins.textContent  = pad(mins);
+      elSecs.textContent  = pad(secs);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
 </body>
 </html>
